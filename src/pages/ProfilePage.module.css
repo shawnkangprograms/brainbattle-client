@@ -1,0 +1,142 @@
+.page { min-height:100vh; background:var(--bg-primary); }
+
+.container {
+  max-width:960px; margin:0 auto;
+  padding:36px 24px 80px;
+  display:flex; flex-direction:column; gap:36px;
+}
+
+.loading {
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  padding:100px; color:var(--text-secondary); font-size:16px;
+}
+.spinner {
+  width:28px; height:28px; border-radius:50%;
+  border:3px solid var(--border); border-top-color:var(--cyan);
+  animation:spin 0.8s linear infinite;
+}
+
+/* Hero */
+.hero {
+  display:flex; align-items:center; gap:24px;
+  padding:28px 32px;
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  box-shadow:var(--shadow-card);
+  animation:slide-in-up 0.4s ease;
+}
+.avatar {
+  width:80px; height:80px; border-radius:50%;
+  background:linear-gradient(135deg, var(--cyan), var(--purple));
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-size:32px; font-weight:900;
+  color:#000; flex-shrink:0;
+  box-shadow:0 0 24px var(--cyan-glow);
+}
+.heroInfo { flex:1; }
+.username {
+  font-family:var(--font-display); font-size:28px; font-weight:900;
+  letter-spacing:2px; color:var(--text-primary); margin-bottom:10px;
+}
+.heroBadges { display:flex; flex-wrap:wrap; gap:8px; }
+.badge {
+  font-size:12px; font-weight:600; letter-spacing:0.5px;
+  padding:4px 12px; border-radius:100px;
+  background:var(--bg-elevated); border:1px solid var(--border);
+  color:var(--text-secondary);
+}
+.rankBadge { color:var(--gold); border-color:rgba(255,215,0,0.3); background:var(--gold-dim); }
+.memberBadge { color:var(--cyan); border-color:var(--border-bright); background:var(--cyan-dim); }
+
+/* Stats Grid */
+.statsGrid {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:14px;
+  animation:slide-in-up 0.4s ease 0.1s both;
+}
+.statCard {
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:20px 16px;
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  text-align:center; transition:all var(--transition);
+  box-shadow:var(--shadow-card);
+}
+.statCard:hover { transform:translateY(-3px); border-color:var(--border-bright); }
+.statIcon { font-size:24px; }
+.statValue {
+  font-family:var(--font-display); font-size:22px; font-weight:900;
+  line-height:1;
+}
+.statLabel { font-size:11px; font-weight:600; letter-spacing:1px; color:var(--text-muted); text-transform:uppercase; }
+
+.stat_cyan .statValue  { color:var(--cyan); }
+.stat_gold .statValue  { color:var(--gold); }
+.stat_green .statValue { color:var(--green); }
+.stat_red .statValue   { color:var(--red); }
+.stat_purple .statValue{ color:var(--purple); }
+
+/* Section */
+.section { display:flex; flex-direction:column; gap:16px; animation:slide-in-up 0.4s ease 0.2s both; }
+.sectionTitle {
+  font-family:var(--font-display); font-size:15px; font-weight:700;
+  letter-spacing:2px; color:var(--text-primary);
+}
+
+/* Achievements */
+.achievementsGrid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+.achievement {
+  display:flex; align-items:center; gap:14px;
+  padding:14px 16px;
+  border-radius:var(--radius); border:1px solid var(--border);
+  background:var(--bg-card);
+  transition:all var(--transition); position:relative;
+}
+.earned { border-color:rgba(255,215,0,0.25); background:var(--gold-dim); }
+.locked { opacity:0.5; }
+.achIcon { font-size:26px; flex-shrink:0; }
+.achLabel { font-size:14px; font-weight:700; color:var(--text-primary); }
+.achDesc { font-size:12px; color:var(--text-secondary); }
+.earnedCheck {
+  position:absolute; top:8px; right:10px;
+  color:var(--gold); font-size:13px; font-weight:900;
+}
+
+/* Games table */
+.gamesTable { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; }
+.gamesHeader {
+  display:grid; grid-template-columns:90px 1fr 60px 90px 80px 90px;
+  padding:10px 20px;
+  background:var(--bg-elevated);
+  font-size:10px; font-weight:700; letter-spacing:2px;
+  color:var(--text-muted); font-family:var(--font-display);
+}
+.gameRow {
+  display:grid; grid-template-columns:90px 1fr 60px 90px 80px 90px;
+  padding:13px 20px; border-top:1px solid var(--border);
+  font-size:13px; font-weight:500; color:var(--text-secondary);
+  align-items:center; transition:background var(--transition);
+}
+.gameRow:hover { background:var(--bg-elevated); }
+.modeTag { font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; }
+.classicMode { background:var(--cyan-dim); color:var(--cyan); }
+.sdMode { background:var(--red-dim); color:var(--red); }
+.gameCategory { color:var(--text-primary); font-weight:600; font-size:13px; }
+.rankNum { font-family:var(--font-display); font-weight:700; }
+.rank1 { color:var(--gold); }
+.gameScore { font-family:var(--font-display); font-weight:700; color:var(--cyan); }
+.gameDate { font-size:12px; color:var(--text-muted); }
+
+.empty { text-align:center; padding:40px; color:var(--text-secondary); }
+.playLink { background:none; border:none; color:var(--cyan); font-size:inherit; font-weight:700; cursor:pointer; text-decoration:underline; }
+
+@media (max-width:768px) {
+  .statsGrid { grid-template-columns:repeat(2,1fr); }
+  .hero { flex-direction:column; text-align:center; padding:20px; }
+  .heroBadges { justify-content:center; }
+  .achievementsGrid { grid-template-columns:1fr; }
+  .gamesHeader, .gameRow { grid-template-columns:80px 1fr 60px 80px; }
+  .gamesHeader span:nth-child(5), .gamesHeader span:nth-child(6),
+  .gameRow span:nth-child(5), .gameRow span:nth-child(6) { display:none; }
+}
+@media (max-width:480px) {
+  .statsGrid { grid-template-columns:repeat(2,1fr); }
+}
