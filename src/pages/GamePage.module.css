@@ -1,36 +1,37 @@
 .container { min-height: 100vh; display: flex; flex-direction: column; }
 
-/* Top bar */
+/* ── Top bar ─────────────────────────────────────────────────── */
 .topBar {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 32px; gap: 20px;
-  background: rgba(10,10,15,0.95);
+  padding: 10px 24px; gap: 16px;
+  background: rgba(10,10,15,0.97);
   border-bottom: 1px solid var(--border);
   position: sticky; top: 0; z-index: 100;
 }
 
-.progress { flex: 1; display: flex; flex-direction: column; gap: 6px; max-width: 300px; }
-.progressLabel { font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--text-secondary); }
+.progress { flex: 1; display: flex; flex-direction: column; gap: 5px; max-width: 280px; min-width: 0; }
+.progressLabel { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 2px; color: var(--text-secondary); white-space: nowrap; }
 .progressBar { height: 4px; background: var(--bg-elevated); border-radius: 2px; overflow: hidden; }
 .progressFill { height: 100%; background: var(--cyan); border-radius: 2px; transition: width 0.5s ease; box-shadow: 0 0 8px var(--cyan-glow); }
 
-/* Timer ring */
-.timerWrap { position: relative; width: 70px; height: 70px; flex-shrink: 0; }
-.timerRing { width: 70px; height: 70px; transform: rotate(-90deg); }
-.timerBg { fill: none; stroke: var(--bg-elevated); stroke-width: 6; }
+/* ── Timer ring ──────────────────────────────────────────────── */
+.timerWrap { position: relative; width: 64px; height: 64px; flex-shrink: 0; }
+.timerRing { width: 64px; height: 64px; transform: rotate(-90deg); }
+.timerBg  { fill: none; stroke: var(--bg-elevated); stroke-width: 6; }
 .timerArc { fill: none; stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 1s linear, stroke 0.3s ease; }
 .timerNum {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-display); font-size: 22px; font-weight: 900;
+  font-family: var(--font-display); font-size: 20px; font-weight: 900;
   transition: color 0.3s ease;
 }
 
-/* Score */
-.scoreBox { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+/* ── Score ───────────────────────────────────────────────────── */
+.scoreBox { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex-shrink: 0; }
 .scoreLabel { font-size: 10px; letter-spacing: 3px; color: var(--text-muted); }
-.scoreVal { font-family: var(--font-display); font-size: 24px; font-weight: 900; color: var(--cyan); }
+.scoreVal { font-family: var(--font-display); font-size: 22px; font-weight: 900; color: var(--cyan); }
 .streakBadge {
+  display: flex; align-items: center; gap: 3px;
   font-size: 11px; font-weight: 700; letter-spacing: 1px;
   color: var(--gold); background: var(--gold-dim);
   padding: 2px 8px; border-radius: 100px;
@@ -38,30 +39,45 @@
   animation: pop 0.3s ease;
 }
 
-/* Layout */
+/* Mobile chat toggle — hidden on desktop */
+.chatToggle {
+  display: none;
+  align-items: center; gap: 5px;
+  padding: 8px 12px;
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: var(--radius);
+  font-size: 13px; font-weight: 600;
+  transition: all var(--transition);
+}
+.chatToggle:hover, .chatToggleActive { border-color: var(--cyan); color: var(--cyan); background: var(--cyan-dim); }
+
+/* ── Layout ──────────────────────────────────────────────────── */
 .layout {
   flex: 1; display: grid;
   grid-template-columns: 1fr 280px;
   gap: 0;
+  min-height: 0;
 }
 
-/* Game area */
+/* ── Game area ───────────────────────────────────────────────── */
 .gameArea {
-  padding: 32px; display: flex; flex-direction: column; gap: 24px;
+  padding: 28px 32px; display: flex; flex-direction: column; gap: 20px;
   border-right: 1px solid var(--border);
+  overflow-y: auto;
 }
 
-/* Question card */
+/* ── Question card ───────────────────────────────────────────── */
 .questionCard {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 32px;
+  padding: 28px;
   position: relative;
   animation: slide-in-up 0.4s ease both;
 }
 
-.questionMeta { margin-bottom: 12px; }
+.questionMeta { margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 .questionCat {
   font-size: 11px; font-weight: 700; letter-spacing: 2px;
   color: var(--cyan); background: var(--cyan-dim);
@@ -70,30 +86,30 @@
 }
 
 .questionText {
-  font-size: clamp(18px, 2.5vw, 26px);
+  font-size: clamp(16px, 2.2vw, 24px);
   font-weight: 600; color: var(--text-primary);
-  line-height: 1.4; font-family: var(--font-body);
+  line-height: 1.5; font-family: var(--font-body);
 }
 
-/* Points flash */
+/* ── Points flash ────────────────────────────────────────────── */
 .pointsFlash {
-  position: absolute; top: 16px; right: 20px;
-  font-family: var(--font-display); font-size: 22px; font-weight: 900;
+  display: flex; align-items: center; gap: 4px;
+  font-family: var(--font-display); font-size: 18px; font-weight: 900;
   animation: pop 0.5s ease both;
 }
 .pointsPos { color: var(--green); }
 .pointsNeg { color: var(--red); }
 
-/* Answers */
+/* ── Answers ─────────────────────────────────────────────────── */
 .answersGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
 }
 
 .answerBtn {
-  display: flex; align-items: center; gap: 14px;
-  padding: 18px 20px;
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 18px;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -101,11 +117,12 @@
   transition: all 0.15s ease;
   animation: slide-in-up 0.4s ease both;
   position: relative; overflow: hidden;
+  min-height: 56px;
 }
 .answerBtn:nth-child(1) { animation-delay: 0.05s; }
-.answerBtn:nth-child(2) { animation-delay: 0.1s; }
+.answerBtn:nth-child(2) { animation-delay: 0.10s; }
 .answerBtn:nth-child(3) { animation-delay: 0.15s; }
-.answerBtn:nth-child(4) { animation-delay: 0.2s; }
+.answerBtn:nth-child(4) { animation-delay: 0.20s; }
 
 .answerBtn:not(:disabled):hover {
   border-color: var(--cyan);
@@ -114,14 +131,14 @@
 }
 
 .answerLabel {
-  font-family: var(--font-display); font-size: 14px; font-weight: 900;
+  font-family: var(--font-display); font-size: 13px; font-weight: 900;
   width: 28px; height: 28px; border-radius: 6px;
   display: flex; align-items: center; justify-content: center;
   background: var(--bg-elevated); color: var(--text-secondary);
   flex-shrink: 0;
 }
 .answerText { flex: 1; font-size: 14px; font-weight: 500; color: var(--text-primary); line-height: 1.3; }
-.answerIcon { font-size: 18px; font-weight: 900; flex-shrink: 0; }
+.answerIcon { flex-shrink: 0; }
 
 /* Answer states */
 .ans_pending { border-color: var(--cyan) !important; background: var(--cyan-dim) !important; }
@@ -138,68 +155,79 @@
 .ans_dimmed { opacity: 0.4; }
 .ans_default {}
 
-/* Mini leaderboard */
+/* ── Mini leaderboard ────────────────────────────────────────── */
 .miniLB {
   background: var(--bg-card);
   border: 1px solid var(--border-bright);
   border-radius: var(--radius-lg);
-  padding: 20px;
+  padding: 18px;
   animation: slide-in-up 0.4s ease both;
 }
-.miniLBTitle { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 3px; color: var(--text-muted); margin-bottom: 14px; }
-.miniLBList { display: flex; flex-direction: column; gap: 8px; }
+.miniLBTitle {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 3px;
+  color: var(--text-muted); margin-bottom: 12px;
+}
+.miniLBList { display: flex; flex-direction: column; gap: 6px; }
 .miniLBRow {
-  display: flex; align-items: center; gap: 12px;
-  padding: 8px 12px; border-radius: var(--radius);
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 10px; border-radius: var(--radius);
   background: var(--bg-secondary);
 }
 .myRow { background: var(--cyan-dim); border: 1px solid rgba(0,245,255,0.2); }
-.miniLBRank { font-family: var(--font-display); font-size: 14px; font-weight: 900; width: 32px; }
-.miniLBName { flex: 1; font-size: 14px; font-weight: 600; color: var(--text-primary); }
-.miniLBScore { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--cyan); }
-.elim { font-size: 16px; }
-.nextHint { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 12px; letter-spacing: 1px; }
+.miniLBRank { font-family: var(--font-display); font-size: 12px; font-weight: 900; width: 32px; color: var(--text-secondary); }
+.miniLBName { flex: 1; font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.miniLBScore { font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--cyan); }
+.nextHint { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 10px; letter-spacing: 1px; }
 
-/* Eliminated */
-.eliminatedScreen {
-  flex: 1; display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center; gap: 16px;
-  animation: fade-in 0.6s ease;
+/* ── Eliminated banner ───────────────────────────────────────── */
+.eliminatedBanner {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 18px;
+  background: var(--red-dim);
+  border: 1px solid var(--red);
+  border-radius: var(--radius-lg);
+  animation: slide-in-up 0.4s ease, shake 0.5s ease 0.1s;
+  flex-wrap: wrap;
 }
-.eliminatedIcon { font-size: 80px; animation: float 3s ease-in-out infinite; }
+.eliminatedIcon { color: var(--red); flex-shrink: 0; }
 .eliminatedTitle {
-  font-family: var(--font-display); font-size: 32px; font-weight: 900;
-  letter-spacing: 3px; color: var(--red);
-  text-shadow: 0 0 30px rgba(255,59,92,0.5);
+  font-family: var(--font-display); font-size: 14px; font-weight: 900;
+  color: var(--red); letter-spacing: 2px; margin-bottom: 3px;
 }
-.eliminatedSub { color: var(--text-secondary); font-size: 16px; max-width: 400px; }
-.eliminatedScore { font-family: var(--font-display); font-size: 18px; color: var(--text-secondary); }
-.eliminatedScore span { color: var(--cyan); font-size: 28px; }
+.eliminatedSub { font-size: 12px; color: var(--text-secondary); }
+.eliminatedScore {
+  margin-left: auto; font-family: var(--font-display); font-size: 16px;
+  font-weight: 900; color: var(--cyan); flex-shrink: 0;
+}
 
-/* Host controls */
-.hostControls { display: flex; gap: 10px; justify-content: flex-end; }
+/* ── Host controls ───────────────────────────────────────────── */
+.hostControls { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
 .hostBtn {
+  display: flex; align-items: center; gap: 6px;
   background: var(--bg-elevated); border: 1px solid var(--border);
   color: var(--text-secondary);
   font-family: var(--font-ui); font-size: 12px; font-weight: 600;
-  letter-spacing: 1px; padding: 8px 16px;
+  letter-spacing: 1px; padding: 8px 14px;
   border-radius: var(--radius); transition: all var(--transition);
 }
 .hostBtn:hover { border-color: var(--border-bright); color: var(--text-primary); }
 .hostBtnDanger:hover { border-color: var(--red); color: var(--red); }
 
-/* Chat sidebar */
-.chatSidebar { display: flex; flex-direction: column; }
+/* ── Chat sidebar ────────────────────────────────────────────── */
+.chatSidebar { display: flex; flex-direction: column; overflow: hidden; }
 .chatCard {
-  flex: 1; padding: 16px;
-  display: flex; flex-direction: column; gap: 12px;
+  flex: 1; padding: 14px;
+  display: flex; flex-direction: column; gap: 10px;
   background: var(--bg-secondary);
+  overflow: hidden;
 }
-.chatTitle { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 3px; color: var(--text-muted); }
+.chatTitle {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 3px; color: var(--text-muted);
+}
 .chatMessages {
-  flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 6px;
-  max-height: calc(100vh - 200px);
+  flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 5px;
 }
 .chatMsg {
   display: flex; flex-direction: column; gap: 2px;
@@ -213,7 +241,7 @@
 .chatText { font-size: 13px; color: var(--text-primary); word-break: break-word; }
 .chatEmpty { font-size: 12px; color: var(--text-muted); text-align: center; padding: 20px; }
 
-.chatInputRow { display: flex; gap: 8px; }
+.chatInputRow { display: flex; gap: 7px; flex-shrink: 0; }
 .chatInput {
   flex: 1; background: var(--bg-card); border: 1px solid var(--border);
   color: var(--text-primary); font-family: var(--font-ui); font-size: 13px;
@@ -223,48 +251,65 @@
 .chatInput::placeholder { color: var(--text-muted); }
 .chatInput:focus { border-color: var(--cyan); }
 .chatSend {
+  display: flex; align-items: center; justify-content: center;
   background: var(--cyan-dim); border: 1px solid var(--border-bright);
-  color: var(--cyan); font-size: 16px; font-weight: 700;
-  padding: 8px 12px; border-radius: var(--radius);
+  color: var(--cyan); padding: 8px 12px; border-radius: var(--radius);
   transition: all var(--transition);
 }
 .chatSend:hover { background: var(--cyan); color: var(--bg-primary); }
 
+/* ── Responsive: Tablet ──────────────────────────────────────── */
 @media (max-width: 900px) {
   .layout { grid-template-columns: 1fr; }
-  .chatSidebar { height: 250px; }
-  .chatMessages { max-height: 150px; }
-  .gameArea { padding: 16px; }
+  .gameArea { border-right: none; border-bottom: 1px solid var(--border); padding: 20px; }
+  .chatSidebar {
+    height: 260px;
+    border-top: 1px solid var(--border);
+  }
+}
+
+/* ── Responsive: Mobile ──────────────────────────────────────── */
+@media (max-width: 600px) {
+  .topBar { padding: 8px 14px; gap: 10px; }
+  .timerWrap { width: 52px; height: 52px; }
+  .timerRing { width: 52px; height: 52px; }
+  .timerNum { font-size: 16px; }
+  .scoreVal { font-size: 18px; }
+  .scoreLabel { display: none; }
+  .progress { max-width: 120px; }
+  .progressLabel { font-size: 11px; letter-spacing: 1px; }
+
+  /* Show chat toggle button */
+  .chatToggle { display: flex; }
+
+  /* Chat sidebar is hidden by default on mobile, shown when chatOpen */
+  .chatSidebar {
+    display: none;
+    height: 280px;
+    border-top: 1px solid var(--border);
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 50;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+  }
+  .chatSidebar.chatOpen {
+    display: flex;
+  }
+
+  .gameArea { padding: 14px; gap: 14px; }
+
+  .questionCard { padding: 18px; }
+  .questionText { font-size: clamp(15px, 4vw, 20px); }
+
+  /* 2-column answers still work fine on mobile, but switch to 1-col below 400px */
+  .answersGrid { gap: 8px; }
+  .answerBtn { padding: 13px 14px; min-height: 50px; gap: 10px; }
+  .answerText { font-size: 13px; }
+
+  /* Add bottom padding so content isn't hidden under open chat */
+  .layout { padding-bottom: 0; }
+}
+
+@media (max-width: 400px) {
   .answersGrid { grid-template-columns: 1fr; }
-}
-
-
-/* Eliminated banner — stays at top, game remains visible */
-.eliminatedBanner {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 20px;
-  background: var(--red-dim);
-  border: 1px solid var(--red);
-  border-radius: var(--radius-lg);
-  animation: slide-in-up 0.4s ease, shake 0.5s ease 0.1s;
-}
-.eliminatedIcon { font-size: 32px; flex-shrink: 0; }
-.eliminatedTitle {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 900;
-  color: var(--red);
-  letter-spacing: 2px;
-  margin-bottom: 3px;
-}
-.eliminatedSub { font-size: 12px; color: var(--text-secondary); }
-.eliminatedScore {
-  margin-left: auto;
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 900;
-  color: var(--cyan);
-  flex-shrink: 0;
 }

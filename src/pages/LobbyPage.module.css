@@ -87,6 +87,8 @@
 }
 .hostBadge { margin-left: 4px; }
 
+.playerDisconnected { opacity: 0.5; }
+
 .kickBtn {
   background: transparent; color: var(--red);
   font-family: var(--font-display); font-size: 10px; font-weight: 700;

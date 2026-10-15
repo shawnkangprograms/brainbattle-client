@@ -53,7 +53,11 @@ export default function AuthPage() {
   return (
     <div className={styles.container}>
       <div className={styles.bg} />
-      <button className={styles.back} onClick={() => navigate('/')}>← BACK TO HOME</button>
+      <button 
+        className={styles.back} 
+        onClick={() => navigate('/')}
+        data-testid="back-to-landing"
+      >← BACK TO HOME</button>
 
       <div className={styles.card}>
         <div className={styles.logoRow}>
@@ -62,20 +66,32 @@ export default function AuthPage() {
         </div>
 
         <div className={styles.tabs}>
-          <button className={`${styles.tab} ${tab === 'login' ? styles.tabActive : ''}`} onClick={() => setTab('login')}>LOGIN</button>
-          <button className={`${styles.tab} ${tab === 'register' ? styles.tabActive : ''}`} onClick={() => setTab('register')}>REGISTER</button>
-          <button className={`${styles.tab} ${tab === 'guest' ? styles.tabActive : ''}`} onClick={() => setTab('guest')}>GUEST</button>
+          <button 
+            className={`${styles.tab} ${tab === 'login' ? styles.tabActive : ''}`} 
+            onClick={() => setTab('login')}
+            data-testid="login-tab"
+          >LOGIN</button>
+          <button 
+            className={`${styles.tab} ${tab === 'register' ? styles.tabActive : ''}`} 
+            onClick={() => setTab('register')}
+            data-testid="register-tab"
+          >REGISTER</button>
+          <button 
+            className={`${styles.tab} ${tab === 'guest' ? styles.tabActive : ''}`} 
+            onClick={() => setTab('guest')}
+            data-testid="guest-tab"
+          >GUEST</button>
         </div>
 
         {tab === 'login' && (
           <div className={styles.form}>
             <p className={styles.formSub}>Welcome back, warrior.</p>
             <input className={styles.input} placeholder="Username" value={form.username}
-              onChange={e => set('username', e.target.value)} autoFocus />
+              onChange={e => set('username', e.target.value)} autoFocus data-testid="username-input" />
             <input className={styles.input} type="password" placeholder="Password" value={form.password}
               onChange={e => set('password', e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && handleLogin()} />
-            <button className={styles.btn} onClick={handleLogin} disabled={loading}>
+              onKeyDown={e => e.key === 'Enter' && handleLogin()} data-testid="password-input" />
+            <button className={styles.btn} onClick={handleLogin} disabled={loading} data-testid="login-btn">
               {loading ? 'LOGGING IN...' : '⚡ LOGIN'}
             </button>
           </div>
@@ -85,13 +101,13 @@ export default function AuthPage() {
           <div className={styles.form}>
             <p className={styles.formSub}>Create your battle identity.</p>
             <input className={styles.input} placeholder="Username (2-20 chars)" value={form.username}
-              onChange={e => set('username', e.target.value)} autoFocus />
+              onChange={e => set('username', e.target.value)} autoFocus data-testid="reg-username-input" />
             <input className={styles.input} type="email" placeholder="Email" value={form.email}
-              onChange={e => set('email', e.target.value)} />
+              onChange={e => set('email', e.target.value)} data-testid="reg-email-input" />
             <input className={styles.input} type="password" placeholder="Password (6+ chars)" value={form.password}
               onChange={e => set('password', e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && handleRegister()} />
-            <button className={styles.btn} onClick={handleRegister} disabled={loading}>
+              onKeyDown={e => e.key === 'Enter' && handleRegister()} data-testid="reg-password-input" />
+            <button className={styles.btn} onClick={handleRegister} disabled={loading} data-testid="register-btn">
               {loading ? 'CREATING...' : '🔥 CREATE ACCOUNT'}
             </button>
           </div>
@@ -102,8 +118,8 @@ export default function AuthPage() {
             <p className={styles.formSub}>Jump in without an account. Stats won't be saved.</p>
             <input className={styles.input} placeholder="Pick a username" value={form.username}
               onChange={e => set('username', e.target.value)} autoFocus
-              onKeyDown={e => e.key === 'Enter' && handleGuest()} />
-            <button className={`${styles.btn} ${styles.btnGuest}`} onClick={handleGuest} disabled={loading}>
+              onKeyDown={e => e.key === 'Enter' && handleGuest()} data-testid="guest-username-input" />
+            <button className={`${styles.btn} ${styles.btnGuest}`} onClick={handleGuest} disabled={loading} data-testid="guest-btn">
               {loading ? 'ENTERING...' : '👤 PLAY AS GUEST'}
             </button>
             <p className={styles.guestNote}>

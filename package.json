@@ -6,22 +6,29 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:chrome": "cypress run --browser chrome",
+    "cy:run:firefox": "cypress run --browser firefox",
+    "cy:run:mobile": "cypress run --config viewportWidth=375,viewportHeight=812"
   },
   "dependencies": {
+    "axios": "^1.6.0",
+    "cypress": "^15.13.1",
+    "framer-motion": "^10.16.16",
+    "lucide-react": "^0.303.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.0",
-    "socket.io-client": "^4.7.2",
-    "axios": "^1.6.0",
-    "framer-motion": "^10.16.16",
     "react-hot-toast": "^2.4.1",
-    "lucide-react": "^0.303.0"
+    "react-router-dom": "^6.21.0",
+    "socket.io-client": "^4.7.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",
+    "mongodb": "^7.1.1",
     "vite": "^5.0.8"
   }
 }

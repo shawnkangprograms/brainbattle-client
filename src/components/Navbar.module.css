@@ -8,7 +8,7 @@
 }
 
 .logo { display:flex; align-items:center; gap:9px; flex-shrink:0; }
-.logoIcon { font-size:24px; }
+.logoIcon { color: var(--cyan); }
 .logoText {
   font-family: var(--font-display);
   font-size:17px; font-weight:900; letter-spacing:2px;
@@ -19,7 +19,7 @@
 .links { display:flex; align-items:center; gap:4px; flex:1; }
 
 .link {
-  display:flex; align-items:center; gap:5px;
+  display:flex; align-items:center; gap:6px;
   padding:7px 14px; border-radius:var(--radius);
   color: var(--text-secondary);
   font-size:14px; font-weight:600; letter-spacing:0.5px;
@@ -32,13 +32,11 @@
 
 /* Status */
 .status { display:flex; align-items:center; gap:6px; font-size:12px; font-weight:600; }
-.statusDot {
-  width:8px; height:8px; border-radius:50%;
-}
+.statusDot { width:8px; height:8px; border-radius:50%; }
 .statusText { letter-spacing:0.5px; }
-.online .statusDot { background:var(--green); box-shadow:0 0 6px var(--green); }
+.online .statusDot  { background:var(--green); box-shadow:0 0 6px var(--green); }
 .offline .statusDot { background:var(--red); }
-.online .statusText { color:var(--green); }
+.online .statusText  { color:var(--green); }
 .offline .statusText { color:var(--red); }
 
 /* Theme toggle */
@@ -46,10 +44,11 @@
   width:36px; height:36px;
   border-radius:var(--radius); border:1px solid var(--border);
   background:var(--bg-elevated);
-  font-size:17px; display:flex; align-items:center; justify-content:center;
+  display:flex; align-items:center; justify-content:center;
+  color: var(--text-secondary);
   transition:all var(--transition);
 }
-.themeBtn:hover { border-color:var(--cyan); background:var(--cyan-dim); transform:scale(1.08); }
+.themeBtn:hover { border-color:var(--cyan); background:var(--cyan-dim); color:var(--cyan); transform:scale(1.08); }
 
 /* User button */
 .userMenu { position:relative; }
@@ -76,8 +75,8 @@
   color:var(--text-muted); background:var(--bg-hover);
   padding:2px 5px; border-radius:3px;
 }
-.chevron { color:var(--text-muted); font-size:12px; transition:transform var(--transition); }
-.chevronUp { transform:scaleY(-1); }
+.chevron { color:var(--text-muted); transition:transform var(--transition); }
+.chevronUp { transform:rotate(180deg); }
 
 /* Dropdown */
 .dropdown {
@@ -91,7 +90,6 @@
   animation:slide-in-up 0.18s ease both;
   z-index:300;
 }
-
 .dropdownHeader {
   display:flex; align-items:center; gap:12px;
   padding:14px 16px;
@@ -106,16 +104,13 @@
 }
 .dropdownName { font-size:15px; font-weight:700; color:var(--text-primary); }
 .dropdownRole { font-size:11px; color:var(--text-muted); letter-spacing:0.5px; }
-
 .dropdownDivider { height:1px; background:var(--border); }
-
 .dropdownItem {
   width:100%; display:flex; align-items:center; gap:10px;
   padding:11px 16px;
   font-size:14px; font-weight:600;
   color:var(--text-secondary);
-  background:transparent;
-  text-align:left;
+  background:transparent; text-align:left;
   transition:all var(--transition);
 }
 .dropdownItem:hover { background:var(--bg-elevated); color:var(--text-primary); }
@@ -131,9 +126,60 @@
 }
 .signInBtn:hover { transform:translateY(-1px); box-shadow:var(--shadow-glow); }
 
-@media (max-width:600px) {
-  .nav { padding:0 14px; gap:10px; }
-  .links { display:none; }
-  .statusText { display:none; }
-  .userName { max-width:70px; }
+/* ── Hamburger (mobile only) ─────────────────────────────────── */
+.mobileMenuWrap { position: relative; display: none; }
+
+.hamburger {
+  width: 38px; height: 38px;
+  border-radius: var(--radius); border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary);
+  transition: all var(--transition);
+}
+.hamburger:hover { border-color: var(--cyan); color: var(--cyan); background: var(--cyan-dim); }
+
+.mobileMenu {
+  position: absolute; top: calc(100% + 10px); right: 0;
+  width: 230px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  animation: slide-in-up 0.18s ease both;
+  z-index: 400;
+  display: flex; flex-direction: column;
+}
+
+.mobileLink {
+  display: flex; align-items: center; gap: 10px;
+  padding: 13px 18px;
+  font-size: 15px; font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent; text-align: left; width: 100%;
+  transition: all var(--transition);
+  border: none;
+}
+.mobileLink:hover { background: var(--bg-elevated); color: var(--text-primary); }
+.mobileLinkActive { color: var(--cyan); background: var(--cyan-dim); }
+.mobileLinkDanger { color: var(--red); }
+.mobileLinkDanger:hover { background: var(--red-dim); color: var(--red); }
+.mobileDivider { height: 1px; background: var(--border); }
+
+/* ── Media queries ───────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .nav { padding: 0 14px; gap: 8px; }
+  .links { display: none; }
+  .statusText { display: none; }
+  .userName { display: none; }
+  .guestTag { display: none; }
+  .chevron { display: none; }
+  .userMenu { display: none; }   /* replaced by hamburger on mobile */
+  .mobileMenuWrap { display: block; }
+}
+
+/* On very small screens hide status dot too */
+@media (max-width: 400px) {
+  .status { display: none; }
 }
